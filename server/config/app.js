@@ -27,7 +27,7 @@ mongoose.connect(DB.URI,{useNewURIParser:true,useUnifiedTopology:true})
 /main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb+srv://alexanderwu:Morethan8Char@cluster0.5rfhz.mongodb.net/IncidentsDatabase?retryWrites=true&w=majority&appName=Cluster0');
+  await mongoose.connect('mongodb+srv://alexanderwu:alexanderwu@cluster0.5rfhz.mongodb.net/IncidentsDatabase?retryWrites=true&w=majority&appName=Cluster0');
 }
 
 app.use(logger('dev'));
