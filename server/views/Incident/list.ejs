@@ -1,0 +1,43 @@
+<%- include ../Partials/header.ejs%>
+<%- include ../Partials/main_nav.ejs%>
+<!--Incident Database-->
+<main class="container">
+    <div class="row">
+        <div class="offset-md-1 col-md-10">
+            <h1><%= title %></h1>
+            <br>
+            <a href="/incidentslist/add" class="btn btn-primary" role="button">
+                <i class="fas fa-plus-circle"></i> Add Incident
+            </a>
+            <table class="table table-bordered table-striped table-hover">
+                <tr class="d-flex">
+                    <th class="text-center col-2">Employee Name</th>
+                    <th class="text-center col-2">Incident Date</th>
+                    <th class="text-center col-1">Incident Location</th>
+                    <th class="col-4">Incident Description</th>
+                </tr>
+                <% for(let count=0;count<IncidentList.length;count++) { %>
+                <tr class="d-flex">
+                    <td class="text-center col-2"><%= IncidentList[count].Name %></td>
+                    <td class="text-center col-2"><%= IncidentList[count].Date %></td>
+                    <td class="text-center col-1"><%=IncidentList[count].Location%></td>
+                    <td class="col-4"><%= IncidentList[count].Description %> </td>
+                    <td class="text-center col-1">
+                        <a href="/incidentslist/edit/<%= IncidentList[count]._id%>"
+                            class="btn btn-primary btn-sm">
+                        <i class="fas fa-pencil-alt"></i>Edit
+                    </a>
+                    </td>
+                    <td class="text-center col-1">
+                        <a href="/incidentslist/delete/<%= IncidentList[count]._id%>"
+                            class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash-alt"></i>Delete
+                    </a>
+                    </td>
+                </tr>    
+                    <%} %>
+            </table>
+        </div>
+    </div>
+</main>
+<%- include ../Partials/footer.ejs%>
