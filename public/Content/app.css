@@ -1,0 +1,21 @@
+.navbar {
+    background-color: #262581 !important; 
+}
+.btn-primary {
+    background-color: #a32828 !important; 
+    border-color: #a32828 !important;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+.rounded {
+    border-radius: 0 !important;
+}
+
+.footer {
+    background-color: #797979 !important; 
+}
+
+footer .navbar-text {
+    width: 100%;
+    text-align: center;
+    margin: 0; 
+}
