@@ -1,1 +1,1 @@
-module.exports={"URI":"mongodb://127.0.0.1:27017/IncidentsCollection"}
+module.exports={"URI":"mongodb+srv://alexanderwu:Morethan8Char@cluster0.5rfhz.mongodb.net/IncidentsDatabase?retryWrites=true&w=majority&appName=Cluster0"}

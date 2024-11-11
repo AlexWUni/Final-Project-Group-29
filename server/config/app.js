@@ -24,14 +24,11 @@ mongoDB.once('open',()=>{
   console.log("Connected with the MongoDB")
 });
 mongoose.connect(DB.URI,{useNewURIParser:true,useUnifiedTopology:true})
-/* main().catch(err => console.log(err));
+/main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/IncidentLib');
-  //await mongoose.connect('mongodb+srv://ahmedsheikh:Test123@cluster0.0f3pz.mongodb.net/');
-
-  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
-}*/
+  await mongoose.connect('mongodb+srv://alexanderwu:Morethan8Char@cluster0.5rfhz.mongodb.net/IncidentsDatabase?retryWrites=true&w=majority&appName=Cluster0');
+}
 
 app.use(logger('dev'));
 app.use(express.json());
