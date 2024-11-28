@@ -10,6 +10,10 @@ let localStrategy = passportLocal.Strategy;
 let flash = require('connect-flash');
 let app = express();
 
+// create a user model instance
+let userModel = require('../model/user');
+let User = userModel.User;
+
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs');
@@ -44,12 +48,15 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// initialize flash
-app.use(flash());
-
 // initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+// initialize flash
+app.use(flash());
+
+
+
 
 let indexRouter = require('../routes/index');
 let usersRouter = require('../routes/users');
