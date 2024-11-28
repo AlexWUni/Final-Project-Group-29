@@ -5,6 +5,14 @@ let mongoose = require('mongoose');
 let Incident = require('../model/incident.js');
 const incident = require('../model/incident.js');
 let incidentController = require('../controllers/incident.js')
+
+function requireAuth(req,res,next)
+{
+    if(!req.isAuthenticated()){
+        return res.redirect('/login');
+    }
+    next();
+}
 /* Get route for the incident list - Read Operation */
 /*
 GET,
@@ -27,7 +35,7 @@ try{
     }
     });
 /* Create Operation --> Get route for displaying me the Add Page */
-router.get('/add',async(req,res,next)=>{
+router.get('/add',requireAuth,async(req,res,next)=>{
     try{
         res.render('Incident/add',{
             title: 'Add Incident'
@@ -42,7 +50,7 @@ router.get('/add',async(req,res,next)=>{
     }
 });
 /* Create Operation --> Post route for processing the Add Page */
-router.post('/add',async(req,res,next)=>{
+router.post('/add', requireAuth,async(req,res,next)=>{
     try{
         let newIncident = Incident({
             "Name":req.body.Name,
@@ -63,7 +71,7 @@ router.post('/add',async(req,res,next)=>{
     }
 });
 /* Update Operation --> Get route for displaying me the Edit Page */
-router.get('/edit/:id',async(req,res,next)=>{
+router.get('/edit/:id', requireAuth,async(req,res,next)=>{
     try{
         const id = req.params.id;
         const incidentToEdit= await Incident.findById(id);
@@ -81,7 +89,7 @@ router.get('/edit/:id',async(req,res,next)=>{
     }
 });
 /* Update Operation --> Post route for processing the Edit Page */ 
-router.post('/edit/:id',async(req,res,next)=>{
+router.post('/edit/:id', requireAuth,async(req,res,next)=>{
     try{
         let id=req.params.id;
         let updatedIncident = Incident({
@@ -103,7 +111,7 @@ router.post('/edit/:id',async(req,res,next)=>{
     }
 });
 /* Delete Operation --> Get route to perform Delete Operation */
-router.get('/delete/:id',async(req,res,next)=>{
+router.get('/delete/:id', requireAuth,async(req,res,next)=>{
     try{
         let id=req.params.id;
         Incident.deleteOne({_id:id}).then(()=>{
