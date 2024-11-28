@@ -15,9 +15,18 @@
           <li class="nav-item">
             <a class="nav-link <% if(title == 'Home') { %> active <% } %>" aria-current="page" href="/home">Home</a>
           </li>
+          <% if(typeof displayName =='string' && displayName) { %>
           <li class="nav-item">
             <a class="nav-link <% if(title == 'Incidents') { %> active <% } %>" href="/incidentslist">Incidents</a>
           </li>
+            <li class="navbar-text">
+            Welcome, <%= displayName %> </li>
+            <li class="nav-item">
+            <a href="/logout" class="nav-link"> Logout</a></li>
+          <% } else { %>
+            <li class="nav-item">
+              <a href="/login" class="nav-link"> Login</a></li>
+          <% } %>
         </ul>
       
       </div>

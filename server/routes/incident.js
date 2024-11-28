@@ -25,7 +25,8 @@ try{
     const IncidentList = await Incident.find();
     res.render('Incident/list',{
         title:'Incidents',
-        IncidentList:IncidentList
+        IncidentList:IncidentList,
+        displayName: req.user ? req.user.displayName:''   
     })}
     catch(err){
         console.error(err);
@@ -38,7 +39,8 @@ try{
 router.get('/add',requireAuth,async(req,res,next)=>{
     try{
         res.render('Incident/add',{
-            title: 'Add Incident'
+            title: 'Add Incident',
+            displayName: req.user ? req.user.displayName:''   
         })
     }
     catch(err)
@@ -78,7 +80,8 @@ router.get('/edit/:id', requireAuth,async(req,res,next)=>{
         res.render('Incident/edit',
             {
                 title:'Edit Incident',
-                Incident:incidentToEdit
+                Incident:incidentToEdit,
+                displayName: req.user ? req.user.displayName:''   
             }
         )
     }

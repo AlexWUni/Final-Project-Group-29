@@ -5,22 +5,33 @@
     <div class="row">
         <div class="offset-md-1 col-md-10">
             <h1><%= title %></h1>
-            <br>
-            <a href="/incidentslist/add" class="btn btn-primary" role="button">
+            <% if(typeof displayName=='string' && displayName) { %>
+                <a href="/incidentslist/add" class="btn btn-primary" role="button">
                 <i class="fas fa-plus-circle"></i> Add Incident
             </a>
+            <% } %>
             <table class="table table-bordered table-striped table-hover">
                 <tr class="d-flex">
+                <% if(typeof displayName=='string' && displayName) { %>
                     <th class="text-center col-2">Employee Name</th>
                     <th class="text-center col-2">Incident Date</th>
-                    <th class="text-center col-1">Incident Location</th>
+                    <th class="text-center col-2">Incident Location</th>
                     <th class="col-4">Incident Description</th>
+                    <th class="text-center col-1"></th>
+                    <th class="text-center col-1"></th>
+                <% } else { %>
+                    <th class="text-center col-2">Employee Name</th>
+                    <th class="text-center col-2">Incident Date</th>
+                    <th class="text-center col-2">Incident Location</th>
+                    <th class="col-6">Incident Description</th>
+                <% } %>
                 </tr>
                 <% for(let count=0;count<IncidentList.length;count++) { %>
                 <tr class="d-flex">
+                <% if(typeof displayName =='string' && displayName) { %>
                     <td class="text-center col-2"><%= IncidentList[count].Name %></td>
                     <td class="text-center col-2"><%= IncidentList[count].Date %></td>
-                    <td class="text-center col-1"><%=IncidentList[count].Location%></td>
+                    <td class="text-center col-2"><%=IncidentList[count].Location%></td>
                     <td class="col-4"><%= IncidentList[count].Description %> </td>
                     <td class="text-center col-1">
                         <a href="/incidentslist/edit/<%= IncidentList[count]._id%>"
@@ -34,8 +45,14 @@
                         <i class="fas fa-trash-alt"></i>Delete
                     </a>
                     </td>
+                <% } else { %>
+                    <td class="text-center col-2"><%= IncidentList[count].Name %></td>
+                    <td class="text-center col-2"><%= IncidentList[count].Date %></td>
+                    <td class="text-center col-2"><%=IncidentList[count].Location%></td>
+                    <td class="col-6"><%= IncidentList[count].Description %> </td>
+                <% } %>  
                 </tr>    
-                    <%} %>
+                <%} %>
             </table>
         </div>
     </div>

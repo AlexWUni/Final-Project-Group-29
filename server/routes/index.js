@@ -4,14 +4,12 @@ let indexController = require('../controllers/index');
 
 
 
-/* GET index page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Home' });
-});
 /* GET home page. */
-router.get('/home', function(req, res, next) {
-  res.render('index', { title: 'Home' });
-});
+router.get('/', indexController.displayHomePage);
+
+/* GET home page. */
+router.get('/home', indexController.displayHomePage);
+
 
 // Get router for login page
 router.get('/login',indexController.displayLoginPage);
