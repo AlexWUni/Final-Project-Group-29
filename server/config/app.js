@@ -3,12 +3,12 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
-
+let session = require('express-session');
+let passport = require('passport');
+let passportLocal = require('passport-local');
+let localStrategy = passportLocal.Strategy;
+let flash = require('connect-flash');
 let app = express();
-let indexRouter = require('../routes/index');
-let usersRouter = require('../routes/users');
-let incidentRouter = require('../routes/incident');
-
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
@@ -29,6 +29,31 @@ mongoose.connect(DB.URI,{useNewURIParser:true,useUnifiedTopology:true})
 async function main() {
   await mongoose.connect('mongodb+srv://alexanderwu:alexanderwu@cluster0.5rfhz.mongodb.net/IncidentsDatabase?retryWrites=true&w=majority&appName=Cluster0');
 }
+
+// Set-up Express Session
+app.use(session({
+  secret:"SomeSecret",
+  saveUninitialized:false,
+  resave:false
+}))
+
+// implement a User Authentication
+passport.use(User.createStrategy());
+
+// serialize and deserialze the user information
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// initialize flash
+app.use(flash());
+
+// initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+let indexRouter = require('../routes/index');
+let usersRouter = require('../routes/users');
+let incidentRouter = require('../routes/incident');
 
 app.use(logger('dev'));
 app.use(express.json());
